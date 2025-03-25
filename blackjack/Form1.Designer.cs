@@ -26,13 +26,27 @@
         ///  Required method for Designer support - do not modify
         ///  the contents of this method with the code editor.
         /// </summary>
+        private System.Windows.Forms.ListBox deckList;
+
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.deckList = new System.Windows.Forms.ListBox();
+            this.SuspendLayout();
+
+           
+            // Deck
+            this.deckList.Name = "DeckList";
+
+            // Form1
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            this.Controls.Add(this.deckList);
+            this.Name = "Form1";
+            this.Text = "Blackjack";
+            this.ResumeLayout(false);
         }
+
 
         #endregion
     }
