@@ -24,6 +24,14 @@
             }
         }
 
+        public void Shuffle()
+        {
+            Random toilet = new Random();
+            for (int i = cards.Count - 1; i > 0; i--)
+            {
+            }
+        }
+
         public List<string> GetCards()
         {
             return new List<string>(cards);

@@ -30,24 +30,44 @@
 
         private void InitializeComponent()
         {
-            this.deckList = new System.Windows.Forms.ListBox();
-            this.SuspendLayout();
-
-           
-            // Deck
-            this.deckList.Name = "DeckList";
-
+            deckList = new ListBox();
+            button1 = new Button();
+            SuspendLayout();
+            // 
+            // deckList
+            // 
+            deckList.ItemHeight = 25;
+            deckList.Location = new Point(0, 0);
+            deckList.Margin = new Padding(4, 5, 4, 5);
+            deckList.Name = "deckList";
+            deckList.Size = new Size(170, 154);
+            deckList.TabIndex = 0;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(552, 120);
+            button1.Name = "button1";
+            button1.Size = new Size(112, 34);
+            button1.TabIndex = 1;
+            button1.Text = "button1";
+            button1.UseVisualStyleBackColor = true;
+            // 
             // Form1
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.deckList);
-            this.Name = "Form1";
-            this.Text = "Blackjack";
-            this.ResumeLayout(false);
+            // 
+            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1143, 750);
+            Controls.Add(button1);
+            Controls.Add(deckList);
+            Margin = new Padding(4, 5, 4, 5);
+            Name = "Form1";
+            Text = "Blackjack";
+            ResumeLayout(false);
         }
 
 
         #endregion
+
+        private Button button1;
     }
 }
