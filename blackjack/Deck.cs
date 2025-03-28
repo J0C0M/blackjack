@@ -26,10 +26,8 @@
 
         public void Shuffle()
         {
-            Random toilet = new Random();
-            for (int i = cards.Count - 1; i > 0; i--)
-            {
-            }
+            Random rng = new Random();
+            
         }
 
         public List<string> GetCards()
