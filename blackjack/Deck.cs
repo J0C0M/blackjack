@@ -1,4 +1,6 @@
-﻿namespace blackjack
+﻿using System;
+
+namespace blackjack
 {
     public class Deck
     {
@@ -21,6 +23,19 @@
                 {
                     cards.Add($"{rank} of {suit}");
                 }
+            }
+        }
+
+        public void Shuffle()
+        {
+            Random random = new Random();
+
+            for (int i = 0; i < cards.Count; i++)
+            {
+                int j = random.Next(i, cards.Count);
+                string l = cards[i];
+                cards[i] = cards[j];
+                cards[j] = l;
             }
         }
 
