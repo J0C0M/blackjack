@@ -33,40 +33,38 @@
 
         private void InitializeComponent()
         {
-            this.deckList = new ListBox();
-            btnShuffle = new Button();
-            SuspendLayout();
+            this.btnShuffle = new System.Windows.Forms.Button();
+            this.deckList = new System.Windows.Forms.ListBox();
+            this.SuspendLayout();
             // 
-            // deckList
+            // btnShuffle
             // 
-            deckList.ItemHeight = 25;
-            deckList.Location = new Point(0, 0);
-            deckList.Margin = new Padding(4, 5, 4, 5);
-            deckList.Name = "deckList";
-            deckList.Size = new Size(166, 179);
-            deckList.TabIndex = 0;
-            deckList.SelectedIndexChanged += deckList_SelectedIndexChanged;
+            this.btnShuffle.Location = new System.Drawing.Point(12, 12);
+            this.btnShuffle.Name = "btnShuffle";
+            this.btnShuffle.Size = new System.Drawing.Size(75, 23);
+            this.btnShuffle.TabIndex = 0;
+            this.btnShuffle.Text = "Shuffle";
+            this.btnShuffle.UseVisualStyleBackColor = true;
+            this.btnShuffle.Click += new System.EventHandler(this.btnShuffleClick);
+            // 
+            // lstDeck
+            // 
+            this.deckList.FormattingEnabled = true;
+            this.deckList.Location = new System.Drawing.Point(12, 41);
+            this.deckList.Name = "deckList";
+            this.deckList.Size = new System.Drawing.Size(260, 199);
+            this.deckList.TabIndex = 1;
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1143, 750);
-            Controls.Add(deckList);
-            Margin = new Padding(4, 5, 4, 5);
-            Name = "Form1";
-            Text = "Blackjack";
-            ResumeLayout(false);
-            //
-            // btnShuffle
-            //
-            btnShuffle.Location = new System.Drawing.Point(12, 12);
-            btnShuffle.Name = "btnShuffle";
-            btnShuffle.Size = new System.Drawing.Size(100, 30);
-            btnShuffle.TabIndex = 0;
-            btnShuffle.Text = "Shuffle";
-            btnShuffle.UseVisualStyleBackColor = true;
-            btnShuffle.Click += new System.EventHandler(btnShuffleClick);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.deckList);
+            this.Controls.Add(this.btnShuffle);
+            this.Name = "Form1";
+            this.Text = "Blackjack";
+            this.ResumeLayout(false);
         }
 
         #endregion

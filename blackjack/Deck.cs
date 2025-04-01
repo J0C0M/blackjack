@@ -1,4 +1,6 @@
-﻿namespace blackjack
+﻿using System;
+
+namespace blackjack
 {
     public class Deck
     {
@@ -26,8 +28,15 @@
 
         public void Shuffle()
         {
-            Random rng = new Random();
-            
+            Random random = new Random();
+
+            for (int i = 0; i < cards.Count; i++)
+            {
+                int j = random.Next(i, cards.Count);
+                string l = cards[i];
+                cards[i] = cards[j];
+                cards[j] = l;
+            }
         }
 
         public List<string> GetCards()
