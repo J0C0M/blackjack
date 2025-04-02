@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace blackjack
 {
@@ -37,6 +38,13 @@ namespace blackjack
                 cards[i] = cards[j];
                 cards[j] = l;
             }
+        }
+
+        public string DealCard()
+        {
+            if (cards.Count == 0)
+                return "No more cards in the deck!";
+            return sigma;
         }
 
         public List<string> GetCards()
