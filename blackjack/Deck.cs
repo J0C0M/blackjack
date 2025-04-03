@@ -30,13 +30,10 @@ namespace blackjack
         public void Shuffle()
         {
             Random random = new Random();
-
             for (int i = 0; i < cards.Count; i++)
             {
                 int j = random.Next(i, cards.Count);
-                string l = cards[i];
-                cards[i] = cards[j];
-                cards[j] = l;
+                (cards[i], cards[j]) = (cards[j], cards[i]);
             }
         }
 
@@ -44,7 +41,9 @@ namespace blackjack
         {
             if (cards.Count == 0)
                 return "No more cards in the deck!";
-            return sigma;
+
+            string card = cards[0];
+            return card;
         }
 
         public List<string> GetCards()

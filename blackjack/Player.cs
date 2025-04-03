@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace blackjack
 {
-    class Player
+    public class Player
     {
-        public string Name {get;}
-        public List<string> Hand {get; private set;}
+        public string Name { get; }
+        public List<string> Hand { get; private set; }
 
         public Player(string name)
         {
