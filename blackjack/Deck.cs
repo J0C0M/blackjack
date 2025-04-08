@@ -33,9 +33,12 @@ namespace blackjack
             for (int i = 0; i < cards.Count; i++)
             {
                 int j = random.Next(i, cards.Count);
-                (cards[i], cards[j]) = (cards[j], cards[i]);
+                string l = cards[i];
+                cards[i] = cards[j];
+                cards[j] = l;
             }
         }
+
 
         public string DealCard()
         {

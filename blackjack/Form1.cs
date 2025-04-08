@@ -9,6 +9,8 @@ namespace blackjack
         {
             InitializeComponent();
             deck = new Deck();
+            InitializePlayers();
+            DisplayPlayers();
         }
 
         private void InitializePlayers()
@@ -29,6 +31,12 @@ namespace blackjack
             {
                 deckList.Items.Add(card);
             }
+
+            foreach (var player in players)
+            {
+            }
+
+            DisplayPlayers();
         }
 
         private void DisplayPlayers()
@@ -36,19 +44,8 @@ namespace blackjack
             playersList.Items.Clear();
             foreach (var player in players)
             {
-                playersList.Items.Add(player.Name);
+                playersList.Items.Add(player.PlayerName());
             }
-        }
-
-        private void deckList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
-

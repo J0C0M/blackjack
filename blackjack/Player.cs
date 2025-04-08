@@ -16,5 +16,14 @@ namespace blackjack
         public void ClearHand()
         {
         }
+
+        public void AddCard(string card)
+        {
+        }
+
+        public string PlayerName()
+        {
+            return Name;
+        }
     }
 }
