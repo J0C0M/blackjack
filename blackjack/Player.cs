@@ -15,10 +15,12 @@ namespace blackjack
 
         public void ClearHand()
         {
+            Hand.Clear();
         }
 
         public void AddCard(string card)
         {
+            Hand.Add(card);
         }
 
         public string PlayerName()

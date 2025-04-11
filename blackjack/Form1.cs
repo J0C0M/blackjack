@@ -34,6 +34,31 @@ namespace blackjack
 
             foreach (var player in players)
             {
+                player.ClearHand();
+            }
+
+            DisplayPlayers();
+        }
+
+        private void btnDealClick(object sender, EventArgs e)
+        {
+            foreach (var player in players)
+            {
+                string card = deck.DealCard();
+
+                if (card == "No more cards in deck")
+                {
+                    MessageBox.Show("No more cards deck");
+                    return;
+                }
+
+                player.AddCard(card);
+            }
+
+            deckList.Items.Clear();
+            foreach (var card in deck.GetCards())
+            {
+                deckList.Items.Add(card);
             }
 
             DisplayPlayers();
@@ -44,7 +69,22 @@ namespace blackjack
             playersList.Items.Clear();
             foreach (var player in players)
             {
-                playersList.Items.Add(player.PlayerName());
+                string playerInfo = player.PlayerName();
+
+                if (player.Hand.Count > 0)
+                {
+                    playerInfo += ": ";
+                    foreach (var card in player.Hand)
+                    {
+                        playerInfo += card + ", ";
+                    }
+                    if (player.Hand.Count > 0)
+                    {
+                        playerInfo = playerInfo.Substring(0, playerInfo.Length - 2);
+                    }
+                }
+
+                playersList.Items.Add(playerInfo);
             }
         }
     }

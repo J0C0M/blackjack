@@ -31,6 +31,7 @@
         private System.Windows.Forms.ListBox deckList;
         private System.Windows.Forms.Button btnShuffle;
         private System.Windows.Forms.ListBox playersList;
+        private System.Windows.Forms.Button btnDeal;
 
 
         private void InitializeComponent()
@@ -38,6 +39,7 @@
             btnShuffle = new System.Windows.Forms.Button();
             deckList = new System.Windows.Forms.ListBox();
             playersList = new System.Windows.Forms.ListBox();
+            btnDeal = new System.Windows.Forms.Button();
             SuspendLayout();
             //
             // btnShuffle
@@ -65,6 +67,17 @@
             playersList.Name = "playersList";
             playersList.Size = new System.Drawing.Size(260, 100);
             playersList.TabIndex = 3;
+            //
+            // btnDeal
+            //
+            btnDeal.Location = new System.Drawing.Point(93, 12);
+            btnDeal.Name = "btnDeal";
+            btnDeal.Size = new System.Drawing.Size(75, 23);
+            btnDeal.TabIndex = 2;
+            btnDeal.Text = "Deal";
+            btnDeal.UseVisualStyleBackColor = true;
+            btnDeal.Click += new System.EventHandler(btnDealClick);
+
             //
             // Form1
             //

@@ -6,8 +6,10 @@ namespace blackjack
     public class Deck
     {
         private List<string> cards;
-        private static readonly string[] Suits = { "Hearts", "Diamonds", "Clubs", "Spades" };
-        private static readonly string[] Ranks = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace" };
+        private static readonly string[] 
+            Suits = { "Hearts", "Diamonds", "Clubs", "Spades" };
+        private static readonly string[] 
+            Ranks = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace" };
 
         public Deck()
         {
@@ -46,6 +48,7 @@ namespace blackjack
                 return "No more cards in the deck!";
 
             string card = cards[0];
+            cards.RemoveAt(0);
             return card;
         }
 
