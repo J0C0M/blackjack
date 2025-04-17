@@ -53,6 +53,14 @@ namespace blackjack
                 }
 
                 player.AddCard(card);
+
+                int score = player.CalculateScore();
+                if (score >= 21)
+                {
+                    MessageBox.Show($"{player.PlayerName()} has {score} points!");
+                    DisplayPlayers();
+                    return;
+                }
             }
 
             deckList.Items.Clear();

@@ -27,5 +27,25 @@ namespace blackjack
         {
             return Name;
         }
+
+        public int CalculateScore()
+        {
+            int total = 0;
+
+            foreach (string card in Hand)
+            {
+                string value = card;
+
+                if (value == "King" || value == "Queen" || value == "Jack")
+                    total = total + 10;
+                else if (value == "Ace")
+                    total = total + 11;
+                else
+                    total = total + Convert.ToInt32(value);
+            }
+
+
+            return total;
+        }
     }
 }
