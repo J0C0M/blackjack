@@ -31,21 +31,44 @@ namespace blackjack
         public int CalculateScore()
         {
             int total = 0;
+            int aceCount = 0;
 
             foreach (string card in Hand)
             {
-                string value = card;
+                int cardValue = 0;
 
-                if (value == "King" || value == "Queen" || value == "Jack")
-                    total = total + 10;
-                else if (value == "Ace")
-                    total = total + 11;
+                if (card.Contains("King") || card.Contains("Queen") || card.Contains("Jack"))
+                {
+                    cardValue = 10;
+                }
+                else if (card.Contains("Ace"))
+                {
+                    cardValue = 11;
+                    aceCount++;
+                }
                 else
-                    total = total + Convert.ToInt32(value);
+                {
+                    for (int i = 2; i <= 10; i++)
+                    {
+                        if (card.Contains(i.ToString()))
+                        {
+                            cardValue = i;
+                            break;
+                        }
+                    }
+                }
+
+                total += cardValue;
             }
 
+            while (total > 21 && aceCount > 0)
+            {
+                total -= 10;
+                aceCount--;
+            }
 
             return total;
         }
+
     }
 }
