@@ -38,6 +38,7 @@ namespace blackjack
             }
 
             DisplayPlayers();
+            btnShuffle.Enabled = false;
         }
 
         private void btnDealClick(object sender, EventArgs e)
