@@ -68,7 +68,7 @@
             deckList.ItemHeight = 15;
             deckList.Location = new Point(12, 41);
             deckList.Name = "deckList";
-            deckList.Size = new Size(260, 199);
+            deckList.Size = new Size(400, 199);  
             deckList.TabIndex = 1;
             // 
             // playersList
@@ -77,14 +77,14 @@
             playersList.ItemHeight = 15;
             playersList.Location = new Point(12, 250);
             playersList.Name = "playersList";
-            playersList.Size = new Size(260, 100);
+            playersList.Size = new Size(400, 150);  
             playersList.TabIndex = 3;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(284, 361);
+            ClientSize = new Size(430, 420); 
             Controls.Add(playersList);
             Controls.Add(deckList);
             Controls.Add(btnDeal);
