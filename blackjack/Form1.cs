@@ -71,7 +71,7 @@ namespace blackjack
                 int score = player.CalculateScore();
                 if (score == 21)
                 {
-                    MessageBox.Show($"{player.PlayerName()} has blackjack (21 points)! Game over!");
+                    someoneHas21 = true;
                     EndGame(player);
                     return;
                 }
