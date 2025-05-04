@@ -16,6 +16,7 @@
             deck = new Deck();
             InitializePlayers();
             DisplayPlayers();
+            btnPass.Enabled = false;
         }
 
         /// Creates the player objects for the game: the human player, 
@@ -86,10 +87,21 @@
                 // Start with the first player
                 currentPlayerIndex = 0;
                 UpdatePlayerTurnMessage();
+
+                // Enable or disable pass button based on which player turn it is
+                UpdatePassButtonState();
             }
         }
 
-        /// Checks if any player has a blackjack (21 points) with their initial two cards.
+        /// Updates the state of the Pass button based on whose turn it is.
+        /// Enabled when its the players turn
+        private void UpdatePassButtonState()
+        {
+            // Only enable Pass button when it's the human players turn
+            btnPass.Enabled = currentPlayerIndex == 0 && !gameEnded;
+        }
+
+        /// Checks if any player has 21 points with their initial two cards.
         /// If a player has blackjack, the game ends immediately with that player as winner.
         private void CheckForBlackjack()
         {
@@ -173,6 +185,28 @@
             }
         }
 
+        /// handles the click event for the pass button
+        /// allows the human player to end their turn without drawing another card
+        private void btnPassClick(object sender, EventArgs e)
+        {
+            // Only allow passing if it's the human player's turn and the game hasn't ended
+            if (currentPlayerIndex == 0 && !gameEnded)
+            {
+                Player currentPlayer = players[currentPlayerIndex];
+                int score = currentPlayer.CalculateScore();
+
+                // Check if player has at least 17 points before allowing them to pass
+                if (score < 17)
+                {
+                    MessageBox.Show("You must have at least 17 points to pass. Draw another card.");
+                    return;
+                }
+
+                MessageBox.Show($"You pass with {score} points.");
+                MoveToNextPlayer();
+            }
+        }
+
         /// Advances to the next player's turn after the current player is done.
         /// If all players are done, it will determine the winner.
         /// If the next player is the dealer, it will play the dealer's turn automatically.
@@ -189,11 +223,64 @@
 
             UpdatePlayerTurnMessage();
 
-            // If next player is the dealer, play the dealer's turn automatically
+            // Update the Pass button state (only enabled for human player)
+            UpdatePassButtonState();
+
+            // If the next player is the dealer, play the dealer's turn automatically
             if (currentPlayerIndex == players.Count - 1)
             {
                 PlayDealerTurn();
             }
+            // For ai players, automatically play their turn
+            else if (currentPlayerIndex > 0 && currentPlayerIndex < players.Count - 1)
+            {
+                PlayAITurn();
+            }
+        }
+
+        /// Handles the AI player's turn automatically.
+        /// ai will draw cards until reaching at least 17 points.
+        private void PlayAITurn()
+        {
+            Player aiPlayer = players[currentPlayerIndex];
+
+            // AI logic. Keeps drawing until reach at least 17 points
+            while (aiPlayer.CalculateScore() < 17)
+            {
+                string card = deck.DealCard();
+                if (card == "No more cards in the deck!")
+                {
+                    MessageBox.Show("No more cards in deck");
+                    break;
+                }
+
+                aiPlayer.AddCard(card);
+                deckList.Items.Clear();
+                foreach (var remainingCard in deck.GetCards())
+                {
+                    deckList.Items.Add(remainingCard);
+                }
+                DisplayPlayers();
+
+                // Check if AI busts
+                if (aiPlayer.CalculateScore() > 21)
+                {
+                    MessageBox.Show($"{aiPlayer.PlayerName()} busts with {aiPlayer.CalculateScore()}!");
+                    break;
+                }
+
+                // Add a small delay to make the AI moves more visible
+                Application.DoEvents();
+                System.Threading.Thread.Sleep(500);
+            }
+
+            int finalScore = aiPlayer.CalculateScore();
+            if (finalScore <= 21)
+            {
+                MessageBox.Show($"{aiPlayer.PlayerName()} stands with {finalScore}.");
+            }
+
+            MoveToNextPlayer();
         }
 
         /// Handles the dealer's turn automatically according to blackjack rules.
@@ -220,6 +307,10 @@
                 }
                 DisplayPlayers();
 
+                // Add a small delay to make the dealer moves more visible
+                Application.DoEvents();
+                System.Threading.Thread.Sleep(500);
+
                 // Check if dealer busts
                 if (dealer.CalculateScore() > 21)
                 {
@@ -227,73 +318,81 @@
                     break;
                 }
             }
+
+            int finalScore = dealer.CalculateScore();
+            if (finalScore <= 21)
+            {
+                MessageBox.Show($"{dealer.PlayerName()} stands with {finalScore}.");
+            }
+
             DetermineWinner();
         }
 
         /// Compares all players' scores to determine the winner(s) of the game.
-        /// Takes into account busted players and the dealer's score.
+        /// The player with the highest score under 21 wins, minimum score of 17 required.
         private void DetermineWinner()
         {
-            int dealerScore = players[players.Count - 1].CalculateScore();
-            bool dealerBusted = dealerScore > 21;
+            // Make a list to store our possible winners
+            List<Player> possibleWinners = new List<Player>();
 
-            List<Player> winners = new List<Player>();
+            // Check each player to see if they qualify
+            foreach (Player player in players)
+            {
+                int score = player.CalculateScore();
+
+                // Player qualifies if score is between 17 and 21
+                if (score >= 17 && score <= 21)
+                {
+                    possibleWinners.Add(player);
+                }
+            }
+
+            // If no one qualifies, game ends with no winner
+            if (possibleWinners.Count == 0)
+            {
+                EndGame(null, "Game over! No winners - everyone either busted or scored below 17.");
+                return;
+            }
+
+            // Find the highest score
             int highestScore = 0;
-
-            // check each player's score against the dealer and other players
-            foreach (var player in players)
+            foreach (Player player in possibleWinners)
             {
-                int playerScore = player.CalculateScore();
-
-                // Skip players who busted
-                if (playerScore > 21)
-                    continue;
-
-                if (dealerBusted)
+                int score = player.CalculateScore();
+                if (score > highestScore)
                 {
-                    // If dealer has more than 21, any not busted player can win
-                    if (playerScore > highestScore)
-                    {
-                        winners.Clear();
-                        winners.Add(player);
-                        highestScore = playerScore;
-                    }
-                    else if (playerScore == highestScore)
-                    {
-                        winners.Add(player);
-                    }
-                }
-                else if (playerScore > dealerScore)
-                {
-                    // If dealer didn't lose, player must beat dealers score
-                    if (playerScore > highestScore)
-                    {
-                        winners.Clear();
-                        winners.Add(player);
-                        highestScore = playerScore;
-                    }
-                    else if (playerScore == highestScore)
-                    {
-                        winners.Add(player);
-                    }
+                    highestScore = score;
                 }
             }
 
-            // If no players win and dealer didnt bust, dealer wins
-            if (winners.Count == 0 && !dealerBusted)
+            // Find who has the highest score
+            List<Player> winners = new List<Player>();
+            foreach (Player player in possibleWinners)
             {
-                winners.Add(players[players.Count - 1]);
+                if (player.CalculateScore() == highestScore)
+                {
+                    winners.Add(player);
+                }
             }
 
-            // Display the winner
-            if (winners.Count > 0)
+            // Announce the winners
+            if (winners.Count == 1)
             {
-                string winnerNames = string.Join(", ", winners.Select(w => w.PlayerName()));
-                EndGame(winners[0], $"Game over! Winner(s): {winnerNames}");
+                EndGame(winners[0], $"Game over! {winners[0].PlayerName()} wins with {highestScore} points!");
             }
-            else
+            else if (winners.Count > 1)
             {
-                EndGame(null, "Game over! Everyone busted!");
+                // Create a string with all winner names
+                string winnerNames = "";
+                for (int i = 0; i < winners.Count; i++)
+                {
+                    winnerNames += winners[i].PlayerName();
+                    if (i < winners.Count - 1)
+                    {
+                        winnerNames += ", ";
+                    }
+                }
+                EndGame(winners[0], $"Game over! It's a tie! Winners: {winnerNames} with {highestScore} points!");
             }
         }
 
@@ -302,6 +401,7 @@
         {
             gameEnded = true;
             btnDeal.Enabled = false;
+            btnPass.Enabled = false;
             btnShuffle.Enabled = true;
             this.Text = "Blackjack";
 
