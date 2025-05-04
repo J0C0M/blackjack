@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace blackjack
 {
     public class Deck
     {
         private List<string> cards;
-        private static readonly string[] Suits = { "Hearts", "Diamonds", "Clubs", "Spades" };
-        private static readonly string[] Ranks = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace" };
+        private static readonly string[] 
+            Suits = { "Hearts", "Diamonds", "Clubs", "Spades" };
+        private static readonly string[] 
+            Ranks = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace" };
 
         public Deck()
         {
@@ -29,7 +32,6 @@ namespace blackjack
         public void Shuffle()
         {
             Random random = new Random();
-
             for (int i = 0; i < cards.Count; i++)
             {
                 int j = random.Next(i, cards.Count);
@@ -37,6 +39,17 @@ namespace blackjack
                 cards[i] = cards[j];
                 cards[j] = l;
             }
+        }
+
+
+        public string DealCard()
+        {
+            if (cards.Count == 0)
+                return "No more cards in the deck!";
+
+            string card = cards[0];
+            cards.RemoveAt(0);
+            return card;
         }
 
         public List<string> GetCards()

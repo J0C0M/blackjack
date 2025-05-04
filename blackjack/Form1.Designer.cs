@@ -30,41 +30,82 @@
 
         private System.Windows.Forms.ListBox deckList;
         private System.Windows.Forms.Button btnShuffle;
+        private System.Windows.Forms.Button btnDeal;
+        private System.Windows.Forms.Button btnPass;
+        private System.Windows.Forms.ListBox playersList;
+
 
         private void InitializeComponent()
         {
-            this.btnShuffle = new System.Windows.Forms.Button();
-            this.deckList = new System.Windows.Forms.ListBox();
-            this.SuspendLayout();
+            btnShuffle = new Button();
+            btnDeal = new Button();
+            btnPass = new Button();
+            deckList = new ListBox();
+            playersList = new ListBox();
+            SuspendLayout();
             // 
             // btnShuffle
             // 
-            this.btnShuffle.Location = new System.Drawing.Point(12, 12);
-            this.btnShuffle.Name = "btnShuffle";
-            this.btnShuffle.Size = new System.Drawing.Size(75, 23);
-            this.btnShuffle.TabIndex = 0;
-            this.btnShuffle.Text = "Shuffle";
-            this.btnShuffle.UseVisualStyleBackColor = true;
-            this.btnShuffle.Click += new System.EventHandler(this.btnShuffleClick);
+            btnShuffle.Location = new Point(12, 12);
+            btnShuffle.Name = "btnShuffle";
+            btnShuffle.Size = new Size(75, 23);
+            btnShuffle.TabIndex = 0;
+            btnShuffle.Text = "Shuffle";
+            btnShuffle.UseVisualStyleBackColor = true;
+            btnShuffle.Click += btnShuffleClick;
             // 
-            // lstDeck
+            // btnDeal
             // 
-            this.deckList.FormattingEnabled = true;
-            this.deckList.Location = new System.Drawing.Point(12, 41);
-            this.deckList.Name = "deckList";
-            this.deckList.Size = new System.Drawing.Size(260, 199);
-            this.deckList.TabIndex = 1;
+            btnDeal.Location = new Point(93, 12);
+            btnDeal.Name = "btnDeal";
+            btnDeal.Size = new Size(75, 23);
+            btnDeal.TabIndex = 2;
+            btnDeal.Text = "Deal";
+            btnDeal.UseVisualStyleBackColor = true;
+            btnDeal.Click += btnDealClick;
+            // 
+            // btnPass
+            // 
+            btnPass.Location = new Point(174, 12);
+            btnPass.Name = "btnPass";
+            btnPass.Size = new Size(75, 23);
+            btnPass.TabIndex = 4;
+            btnPass.Text = "Pass";
+            btnPass.UseVisualStyleBackColor = true;
+            btnPass.Click += btnPassClick;
+            btnPass.Enabled = false;
+            // 
+            // deckList
+            // 
+            deckList.FormattingEnabled = true;
+            deckList.ItemHeight = 15;
+            deckList.Location = new Point(12, 41);
+            deckList.Name = "deckList";
+            deckList.Size = new Size(400, 199);
+            deckList.TabIndex = 1;
+            // 
+            // playersList
+            // 
+            playersList.FormattingEnabled = true;
+            playersList.ItemHeight = 15;
+            playersList.Location = new Point(12, 250);
+            playersList.Name = "playersList";
+            playersList.Size = new Size(400, 150);
+            playersList.TabIndex = 3;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Controls.Add(this.deckList);
-            this.Controls.Add(this.btnShuffle);
-            this.Name = "Form1";
-            this.Text = "Blackjack";
-            this.ResumeLayout(false);
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(430, 420);
+            Controls.Add(btnPass);
+            Controls.Add(playersList);
+            Controls.Add(deckList);
+            Controls.Add(btnDeal);
+            Controls.Add(btnShuffle);
+            Name = "Form1";
+            Text = "Blackjack";
+            ResumeLayout(false);
         }
 
         #endregion
