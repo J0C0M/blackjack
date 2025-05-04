@@ -30,49 +30,64 @@
 
         private System.Windows.Forms.ListBox deckList;
         private System.Windows.Forms.Button btnShuffle;
+        private System.Windows.Forms.Button btnDeal;  // Added deal button declaration
         private System.Windows.Forms.ListBox playersList;
 
 
         private void InitializeComponent()
         {
-            btnShuffle = new System.Windows.Forms.Button();
-            deckList = new System.Windows.Forms.ListBox();
-            playersList = new System.Windows.Forms.ListBox();
+            btnShuffle = new Button();
+            btnDeal = new Button();  // Initialize the deal button
+            deckList = new ListBox();
+            playersList = new ListBox();
             SuspendLayout();
-            //
+            // 
             // btnShuffle
-            //
-            btnShuffle.Location = new System.Drawing.Point(12, 12);
+            // 
+            btnShuffle.Location = new Point(12, 12);
             btnShuffle.Name = "btnShuffle";
-            btnShuffle.Size = new System.Drawing.Size(75, 23);
+            btnShuffle.Size = new Size(75, 23);
             btnShuffle.TabIndex = 0;
             btnShuffle.Text = "Shuffle";
             btnShuffle.UseVisualStyleBackColor = true;
-            btnShuffle.Click += new System.EventHandler(btnShuffleClick);
-            //
+            btnShuffle.Click += btnShuffleClick;
+            // 
+            // btnDeal
+            // 
+            btnDeal.Location = new Point(93, 12);
+            btnDeal.Name = "btnDeal";
+            btnDeal.Size = new Size(75, 23);
+            btnDeal.TabIndex = 2;
+            btnDeal.Text = "Deal";
+            btnDeal.UseVisualStyleBackColor = true;
+            btnDeal.Click += btnDealClick;
+            // 
             // deckList
-            //
+            // 
             deckList.FormattingEnabled = true;
-            deckList.Location = new System.Drawing.Point(12, 41);
+            deckList.ItemHeight = 15;
+            deckList.Location = new Point(12, 41);
             deckList.Name = "deckList";
-            deckList.Size = new System.Drawing.Size(260, 199);
+            deckList.Size = new Size(400, 199);  
             deckList.TabIndex = 1;
-            //
+            // 
             // playersList
-            //
+            // 
             playersList.FormattingEnabled = true;
-            playersList.Location = new System.Drawing.Point(12, 250);
+            playersList.ItemHeight = 15;
+            playersList.Location = new Point(12, 250);
             playersList.Name = "playersList";
-            playersList.Size = new System.Drawing.Size(260, 100);
+            playersList.Size = new Size(400, 150);  
             playersList.TabIndex = 3;
-            //
+            // 
             // Form1
-            //
-            AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(284, 361);
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(430, 420); 
             Controls.Add(playersList);
             Controls.Add(deckList);
+            Controls.Add(btnDeal);
             Controls.Add(btnShuffle);
             Name = "Form1";
             Text = "Blackjack";
