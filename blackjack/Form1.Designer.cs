@@ -30,14 +30,16 @@
 
         private System.Windows.Forms.ListBox deckList;
         private System.Windows.Forms.Button btnShuffle;
-        private System.Windows.Forms.Button btnDeal;  // Added deal button declaration
+        private System.Windows.Forms.Button btnDeal;
+        private System.Windows.Forms.Button btnPass;
         private System.Windows.Forms.ListBox playersList;
 
 
         private void InitializeComponent()
         {
             btnShuffle = new Button();
-            btnDeal = new Button();  // Initialize the deal button
+            btnDeal = new Button();
+            btnPass = new Button();
             deckList = new ListBox();
             playersList = new ListBox();
             SuspendLayout();
@@ -62,13 +64,24 @@
             btnDeal.UseVisualStyleBackColor = true;
             btnDeal.Click += btnDealClick;
             // 
+            // btnPass
+            // 
+            btnPass.Location = new Point(174, 12);
+            btnPass.Name = "btnPass";
+            btnPass.Size = new Size(75, 23);
+            btnPass.TabIndex = 4;
+            btnPass.Text = "Pass";
+            btnPass.UseVisualStyleBackColor = true;
+            btnPass.Click += btnPassClick;
+            btnPass.Enabled = false;
+            // 
             // deckList
             // 
             deckList.FormattingEnabled = true;
             deckList.ItemHeight = 15;
             deckList.Location = new Point(12, 41);
             deckList.Name = "deckList";
-            deckList.Size = new Size(400, 199);  
+            deckList.Size = new Size(400, 199);
             deckList.TabIndex = 1;
             // 
             // playersList
@@ -77,14 +90,15 @@
             playersList.ItemHeight = 15;
             playersList.Location = new Point(12, 250);
             playersList.Name = "playersList";
-            playersList.Size = new Size(400, 150);  
+            playersList.Size = new Size(400, 150);
             playersList.TabIndex = 3;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(430, 420); 
+            ClientSize = new Size(430, 420);
+            Controls.Add(btnPass);
             Controls.Add(playersList);
             Controls.Add(deckList);
             Controls.Add(btnDeal);
